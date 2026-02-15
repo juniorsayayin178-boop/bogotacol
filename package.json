@@ -1,6 +1,7 @@
 {
-  "name": "telegram-endpoint",
+  "name": "telegram-approval-app",
   "version": "1.0.0",
+  "description": "Sistema de aprobación con Telegram y Render",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {

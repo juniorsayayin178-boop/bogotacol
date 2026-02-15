@@ -1,0 +1,18 @@
+git remote add origin https://github.com/juniorsayayin178-boop/bogotacol.git
+git branch -M main
+git push -u origin main
+
+
+
+telegram-approval-app/
+│
+├── package.json
+├── server.js
+├── .gitignore
+├── README.md
+│
+└── public/
+    ├── index.html
+    ├── load.html
+    ├── ok.html
+    └── error.html

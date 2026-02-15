@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Esperando aprobación</title>
+</head>
+<body>
+
+<h2>⏳ Esperando aprobación...</h2>
+
+<script>
+const requestId = localStorage.getItem("requestId");
+
+async function verificar() {
+  const res = await fetch(`/api/estado/${requestId}`);
+  const data = await res.json();
+
+  if (data.estado === "ok") {
+    window.location.href = "ok.html";
+  }
+
+  if (data.estado === "error") {
+    window.location.href = "error.html";
+  }
+}
+
+setInterval(verificar, 3000);
+</script>
+
+</body>
+</html>
