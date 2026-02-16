@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ingresar código</title>
+</head>
+<body>
+
+<h2>Ingrese su código</h2>
+
+<input id="codigo" placeholder="Código">
+<button onclick="enviar()">Enviar</button>
+
+<script>
+async function enviar(){
+ const codigo=document.getElementById("codigo").value;
+ const id=localStorage.getItem("id");
+
+ if(!codigo){
+   alert("Ingrese el código");
+   return;
+ }
+
+ await fetch("/api/codigo",{
+  method:"POST",
+  headers:{ "Content-Type":"application/json"},
+  body:JSON.stringify({id,codigo})
+ });
+
+ location="load.html";
+}
+</script>
+
+</body>
+</html>

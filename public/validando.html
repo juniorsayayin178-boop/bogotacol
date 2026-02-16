@@ -1,0 +1,16 @@
+<h2>Validando código...</h2>
+
+<script>
+const params = new URLSearchParams(location.search);
+const id = params.get("id");
+const code = params.get("code");
+
+fetch(`/api/validar?id=${id}&code=${code}`)
+.then(r=>r.json())
+.then(d=>{
+  if(d.result==="ok")
+    location.href="codigo.html";
+  else
+    location.href="codigoerr.html";
+});
+</script>

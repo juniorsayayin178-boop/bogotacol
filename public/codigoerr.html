@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Código incorrecto</title>
+</head>
+<body style="text-align:center;font-family:sans-serif;margin-top:80px;">
+
+<h1 style="color:red;">❌ Código incorrecto</h1>
+
+<p>El código ingresado no es válido.</p>
+
+<button onclick="reintentar()">Intentar nuevamente</button>
+
+<script>
+function reintentar(){
+  const params = new URLSearchParams(location.search);
+  const id = params.get("id");
+
+  if(id)
+    location.href = `/codigo.html?id=${id}`;
+  else
+    location.href = "/codigo.html";
+}
+</script>
+
+</body>
+</html>
