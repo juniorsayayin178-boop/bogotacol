@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solicitud en Proceso</title>
+
+<style>
+:root{
+ --rojo-davi:#e60000;
+ --rojo-oscuro:#b00000;
+ --gris-suave:#f7f7f7;
+ --texto-oscuro:#333;
+ --radius:18px;
+ --transition:.28s ease;
+ --shadow-strong:0 6px 24px rgba(0,0,0,.2);
+}
+
+body{
+ margin:0;
+ font-family:"Segoe UI",Tahoma,sans-serif;
+ background:var(--gris-suave);
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ min-height:100vh;
+}
+
+.app-container{
+ width:370px;
+ background:#F7F7F9;
+ padding:26px;
+ border-radius:var(--radius);
+ box-shadow:var(--shadow-strong);
+ text-align:center;
+ animation:fadeIn .4s ease;
+}
+
+.logo{
+ width:150px;
+ margin-bottom:30px;
+}
+
+h2{
+ margin:10px 0;
+ color:var(--texto-oscuro);
+ font-weight:700;
+}
+
+.pending-icon{
+ width:110px;
+ height:110px;
+ border-radius:50%;
+ background:#fff;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ margin:20px auto;
+ box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.pending-icon img{
+ width:70px;
+}
+
+.btn{
+ width:100%;
+ padding:14px;
+ border-radius:var(--radius);
+ border:none;
+ background:var(--rojo-davi);
+ color:#fff;
+ font-size:1.05rem;
+ font-weight:600;
+ cursor:pointer;
+ margin-top:18px;
+ transition:var(--transition);
+}
+
+.btn:hover{
+ background:var(--rojo-oscuro);
+}
+
+.secure{
+ margin-top:14px;
+ font-size:.75rem;
+ color:#888;
+}
+
+@keyframes fadeIn{
+ from{opacity:0;transform:translateY(10px)}
+ to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app-container">
+  <img src="assets/logo.svg" class="logo">
+<div class="pending-icon">
+<img src="assets/aprobado.jpg" alt="Validado">
+</div>
+
+ 
+
+<div class="secure">
+🔒 Evaluación automática · Información protegida
+</div>
+
+</div>
+
+</body>
+</html>
