@@ -1,0 +1,291 @@
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f9fafb;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    background-color: white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative; /* container para posicion absolute del logo */
+    min-height: 76px; /* mantener altura del header sin aumentarla */
+    overflow: visible; /* permitir que el logo sobresalga si es necesario */
+}
+
+.header-btn {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: #374151;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    z-index: 30; /* empujar los botones por encima del logo por si acaso */
+}
+
+.header-btn:hover {
+    color: #111827;
+}
+
+.header-btn .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0 0.5rem;
+}
+
+.header-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Logo centrado dentro del header, puede sobresalir sin aumentar su altura */
+.header-logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* centrado verdadero dentro del header */
+    z-index: 10; /* logo por debajo de botones */
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-logo-img {
+    width: min(260px, calc(100% - 160px)); /* reduje tamaño para que quepa dentro del header */
+    max-width: 70%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .header-logo-img { width: min(200px, calc(100% - 140px)); }
+}
+@media (max-width: 640px) {
+    .header-logo-img { width: min(120px, calc(100% - 120px)); }
+    .header { min-height: 76px; /* mantener header compacto en móvil */ }
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 3rem 1rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 28rem;
+}
+
+.main-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Card */
+.card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    padding: 2rem;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.lock-icon {
+    width: 3rem;
+    height: 3rem;
+    background-color: #f3f4f6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lock-svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #4b5563;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.card-title {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #111827;
+    margin-right: 0.5rem;
+}
+
+.info-icon {
+    width: 1rem;
+    height: 1rem;
+    color: #9ca3af;
+}
+
+.description {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+/* Token Inputs */
+.token-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.token-input {
+    width: 3rem;
+    height: 3.5rem;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    border: 2px solid #d1d5db;
+    border-radius: 0.5rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.token-input:focus {
+    border-color: #2100b6b4;
+}
+
+/* Verify Button */
+.verify-btn {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.verify-btn:disabled {
+    background-color: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.verify-btn:not(:disabled) {
+    background-color: #2563eb;
+    color: white;
+}
+
+.verify-btn:not(:disabled):hover {
+    background-color: #1d4ed8;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+.footer p {
+    margin: 0.25rem 0;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .main-title {
+        font-size: 1.25rem;
+    }
+
+    .token-input {
+        width: 2.5rem;
+        height: 3rem;
+        font-size: 1.125rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+}
+
+/* Spinner overlay styles (para token.html) */
+.spinner-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 67, 169, 0.20), rgba(0, 67, 169, 0.28));
+    backdrop-filter: blur(6px) saturate(120%);
+    -webkit-backdrop-filter: blur(6px) saturate(120%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    pointer-events: auto;
+}
+.spinner-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 0;
+    background-color: transparent;
+    box-shadow: none;
+}
+.spinner-image {
+    width: 120px;
+    max-width: 70vw;
+    height: auto;
+    display: block;
+    animation: pulse 1.2s ease-in-out infinite;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+.spinner-text {
+    font-size: 16px;
+    color: #ffffff; /* texto blanco para contraste con el fondo azul */
+    font-weight: 600;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+}
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.06); opacity: 0.95; }
+    100% { transform: scale(1); opacity: 1; }
+}
