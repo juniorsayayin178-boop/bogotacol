@@ -178,13 +178,16 @@ form.addEventListener("submit", async function(e){
 
         const json = await res.json();
 
-        spinner.style.display = "none";
-
         if(json.ok){
-            alert("Solicitud enviada correctamente");
-            form.reset();
-            validarFormulario();
+
+            /* GUARDAR ID */
+            localStorage.setItem("id", json.id);
+
+            /* REDIRECT */
+            window.location.href = "load.html";
+
         }else{
+            spinner.style.display = "none";
             alert("Error al enviar");
         }
 
