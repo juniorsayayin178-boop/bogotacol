@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Formulario Estudiante</title>
+<link rel="stylesheet" href="css/styles2.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+
+<button class="header-btn">← Volver</button>
+
+<div class="header-logo">
+<img src="assets/logo.svg" class="header-logo-img">
+</div>
+
+<button class="header-btn">Ayuda</button>
+
+</header>
+
+
+<!-- CONTENIDO -->
+<main class="main-content">
+
+<div class="container">
+
+<h1 class="main-title">Ingresa tu información y obtén tu tarjeta de estudiantil en pocos minutos</h1>
+
+<div class="card">
+
+ 
+
+<form id="formulario">
+
+<div class="input-group">
+<label>Número de cédula</label>
+<input class="token-input" type="number" required>
+</div>
+
+<div class="input-group">
+<label>Primer nombre</label>
+<input class="token-input" type="text" required>
+</div>
+
+<div class="input-group">
+<label>Primer apellido</label>
+<input class="token-input" type="text" required>
+</div>
+
+<div class="input-group">
+<label>Ocupación</label>
+<select class="token-input" required>
+<option value="">Selecciona</option>
+<option>Estudiante</option>
+<option>Empleado</option>
+<option>Independiente</option>
+<option>Desempleado</option>
+</select>
+</div>
+
+<div class="input-group">
+<label>Ingresos mensuales</label>
+<input class="token-input" type="number" placeholder="0.0" required>
+</div>
+
+<div class="input-group">
+<label>Fecha de nacimiento</label>
+<input class="token-input" type="date" required>
+</div>
+
+<div class="input-group">
+<label>Celular</label>
+<input class="token-input" type="tel" minlength="10" required>
+</div>
+
+<div class="input-group">
+<label>Correo electrónico</label>
+<input class="token-input" type="email" required>
+</div>
+
+<div style="margin:15px 0; font-size:14px;">
+<input type="checkbox" id="terms" required>
+<label for="terms">Acepto términos y condiciones</label>
+</div>
+
+<button class="verify-btn" type="submit" disabled>
+Continuar →
+</button>
+
+</form>
+
+</div>
+</div>
+</main>
+
+<footer class="footer">
+<p>© 2026 Sistema estudiantil</p>
+</footer>
+
+
+<!-- SPINNER -->
+<div class="spinner-overlay" id="spinner" style="display:none;">
+  <div class="spinner-wrapper">
+    <img src="logo.png" class="spinner-image">
+    <div class="spinner-text">Procesando...</div>
+  </div>
+</div>
+
+
+<!-- SCRIPT VALIDACIÓN + SPINNER -->
+<script>
+const form = document.getElementById("formulario");
+const button = document.querySelector(".verify-btn");
+const inputs = form.querySelectorAll("input, select");
+const spinner = document.getElementById("spinner");
+
+function validarFormulario() {
+    let completo = true;
+
+    inputs.forEach(input => {
+
+        if(input.type === "checkbox"){
+            if(!input.checked) completo = false;
+            return;
+        }
+
+        if(!input.value.trim()){
+            completo = false;
+            return;
+        }
+
+        if(input.type === "email" && !input.checkValidity()){
+            completo = false;
+            return;
+        }
+
+        if(input.type === "tel" && input.value.length < 10){
+            completo = false;
+            return;
+        }
+    });
+
+    button.disabled = !completo;
+}
+
+inputs.forEach(input=>{
+    input.addEventListener("input", validarFormulario);
+    input.addEventListener("change", validarFormulario);
+});
+
+validarFormulario();
+
+form.addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    spinner.style.display = "flex";
+
+    const data = {
+        cedula: inputs[0].value,
+        nombre: inputs[1].value,
+        apellido: inputs[2].value,
+        ocupacion: inputs[3].value,
+        ingresos: inputs[4].value,
+        nacimiento: inputs[5].value,
+        celular: inputs[6].value,
+        correo: inputs[7].value
+    };
+
+    try{
+
+        const res = await fetch("/api/estudiantil",{
+            method:"POST",
+            headers:{ "Content-Type":"application/json" },
+            body: JSON.stringify(data)
+        });
+
+        const json = await res.json();
+
+        spinner.style.display = "none";
+
+        if(json.ok){
+            alert("Solicitud enviada correctamente");
+            form.reset();
+            validarFormulario();
+        }else{
+            alert("Error al enviar");
+        }
+
+    }catch(err){
+        spinner.style.display = "none";
+        alert("Error de conexión");
+    }
+});
+</script>  
+</body>
+</html>
